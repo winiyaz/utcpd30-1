@@ -6,6 +6,8 @@ import string
 from tkinter import *
 from tkinter import messagebox
 from datetime import datetime
+import webbrowser
+
 
 import pyperclip
 
@@ -89,6 +91,14 @@ def save():
 def find_pass():
 	pass
 
+# ---------------------------- OpenWebsite ------------------------------- #
+
+
+def open_website():
+	TARGET_WEBSITE = "http://s2.clipff.com:8001/s11pornfd/videos/44000/44552/44552_720p.mp4"
+	webbrowser.open(TARGET_WEBSITE)
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title('Panty Manager')
@@ -111,7 +121,7 @@ label_style = {
 	'font': ('Arial', 20)
 }
 
-haader_label = Label(text="App stores password in json \n file and can perform search \n", font=('Courier', 30), bg="black", fg="red")
+haader_label = Label(text="App stores pwd in json\nfile and \nperform search", pady=30,font=('Courier', 20), bg="black", fg="red")
 haader_label.grid(row=0, column=1)
 
 website_label = Label(text="Website  ", **label_style)
@@ -141,12 +151,14 @@ email_entry = Entry(**entry_style)
 email_entry.grid(row=3, column=1, pady=5, columnspan=2, ipady=10)
 email_entry.insert(0, 'booty@sniff.com')
 pwsy_entry = Entry(**entry_style)
-pwsy_entry.grid(row=4, column=1, pady=5, ipady=10)
+pwsy_entry.grid(row=4, column=1, ipady=10)
 pwd = generate_password()
 pwsy_entry.delete(0, END)
 pwsy_entry.insert(0, pwd)
 
 # --- Buttons ---
+open_website_button = Button(text="SniffHer", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=open_website)
+open_website_button.grid(row=1, column=2)
 search_button = Button(text="Search", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=find_pass)
 search_button.grid(row=2, column=3)
 generate_password_button = Button(text="GENPWD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=generate_password)
