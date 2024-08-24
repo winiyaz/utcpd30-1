@@ -18,6 +18,7 @@ ENTRYBG = "black"
 ENTRYFG = "#F97300"
 BUTTONBG = "#180161"
 INSERT_BACKGROUND = 'hotpink'
+fil_pa = 'panty/sniff.json'
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -37,6 +38,7 @@ def generate_password(length=22):
 
 # Ensure directory called 'panty' is present , if not create
 os.makedirs('panty', exist_ok=True)
+
 
 
 def save():
@@ -68,7 +70,6 @@ def save():
 
 		# --- Validation
 		if is_ok:
-			fil_pa = 'panty/sniff.json'
 			try:
 				with open(fil_pa, "r") as data_file:
 					data = json.load(data_file)
@@ -89,7 +90,15 @@ def save():
 # ---------------------------- FIND PASSWORD ------------------------------- #
 
 def find_pass():
-	pass
+	website = website_entry.get()
+	with open(fil_pa) as d_f:
+		da = json.load(d_f)
+		if website in da:
+			email = da[website]["email"]
+			pasy = da[website]["pasy"]
+			messagebox.showinfo(title=website, message=f"Email: {email}\nPwsy: {pasy}")
+		print(da)
+
 
 # ---------------------------- OpenWebsite ------------------------------- #
 
@@ -151,7 +160,7 @@ email_entry = Entry(**entry_style)
 email_entry.grid(row=3, column=1, pady=5, columnspan=2, ipady=10)
 email_entry.insert(0, 'booty@sniff.com')
 pwsy_entry = Entry(**entry_style)
-pwsy_entry.grid(row=4, column=1, ipady=10)
+pwsy_entry.grid(row=4, column=1, ipady=10, columnspan=2)
 pwd = generate_password()
 pwsy_entry.delete(0, END)
 pwsy_entry.insert(0, pwd)
@@ -162,7 +171,7 @@ open_website_button.grid(row=1, column=2)
 search_button = Button(text="Search", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=find_pass)
 search_button.grid(row=2, column=3)
 generate_password_button = Button(text="GENPWD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=generate_password)
-generate_password_button.grid(row=4, column=3)
+generate_password_button.grid(row=4, column=3, columnspan=1)
 add_button = Button(text="ADD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, width=46, command=save)
 add_button.grid(row=5, column=1, pady=20, columnspan=2)
 
