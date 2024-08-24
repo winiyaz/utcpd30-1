@@ -5,6 +5,7 @@ import secrets
 import string
 from tkinter import *
 from tkinter import messagebox
+from datetime import datetime
 
 import pyperclip
 
@@ -23,8 +24,8 @@ INSERT_BACKGROUND = 'hotpink'
 def generate_password(length=22):
 	characters = string.ascii_letters + string.digits + string.punctuation
 	password = ''.join(secrets.choice(characters) for _ in range(length))
-	password_entry.delete(0, END)
-	password_entry.insert(0, password)
+	pwsy_entry.delete(0, END)
+	pwsy_entry.insert(0, password)
 	pyperclip.copy(password)
 	return password
 
@@ -39,42 +40,49 @@ os.makedirs('panty', exist_ok=True)
 def save():
 	website = website_entry.get()
 	email = email_entry.get()
-	password = password_entry.get()
+	pwsy = pwsy_entry.get()
+	current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	# current_datetime_utc = datetime.now(timezone.utc)  # get current data and time UTCTZ
 	new_data = {
 		website: {
 			"email": email,
-			"password": password
+			"pasy": pwsy,
+			"date": current_datetime
 		}
 
 	}
 
-	if len(website) == 0 or len(password) == 0:
+	if len(website) == 0 or len(pwsy) == 0:
 		messagebox.showinfo(title="😡FUKR", message="NoEmpty")
 	else:
-		# is_ok = messagebox.askokcancel(title=website, message=f"""
-		# 	Details Entered:
-		# 	website: {website}
-		# 	Email:{email}
-		# 	Password: {password}
-		# 	---
-		# 	Good ?
-		# """)
+		is_ok = messagebox.askokcancel(title=website, message=f"""
+			Details Entered:
+			website: {website}
+			Email:{email}
+			Password: {pwsy}
+			---
+			Good ?
+		""")
 
 		# --- Validation
-		# if is_ok:
-		fil_pa = 'panty/sniff.json'
-		with open(fil_pa, "r") as data_file:
-			data = json.load(data_file)
-			data.update(new_data) # new_data refers to the object already created
-
-		with open(fil_pa, "w") as data_file:
-			json.dump(data, data_file, indent=4)
-			print(data)
-			website_entry.delete(0, END)
-			password_entry.delete(0, END)
-			window.quit()  # Stops the main event loop
-			window.destroy()  # Destroys the main window
+		if is_ok:
+			fil_pa = 'panty/sniff.json'
+			try:
+				with open(fil_pa, "r") as data_file:
+					data = json.load(data_file)
+			except FileNotFoundError:
+				with open(fil_pa, "w") as data_file:
+					json.dump(new_data, data_file, indent=4)
+			else:
+				data.update(new_data)
+				with open(fil_pa, "w") as data_file:
+					json.dump(data, data_file, indent=4)
+				print(data)
+			finally:
+				website_entry.delete(0, END)
+				pwsy_entry.delete(0, END)
+				window.quit()  # Stops the main event loop
+				window.destroy()  # Destroys the main window
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -102,7 +110,7 @@ website_label = Label(text="Website  ", **label_style)
 website_label.grid(row=1, column=0)
 email_label = Label(text="Email/Username  ", **label_style)
 email_label.grid(row=2, column=0)
-password_label = Label(text="Password  ", **label_style)
+password_label = Label(text="Pwsy  ", **label_style)
 password_label.grid(row=3, column=0)
 
 # Entry styles made into an object that is then being called inside Entry
@@ -124,11 +132,11 @@ website_entry.grid(row=1, column=1, pady=5, columnspan=2, ipady=10)
 email_entry = Entry(**entry_style)
 email_entry.grid(row=2, column=1, pady=5, columnspan=2, ipady=10)
 email_entry.insert(0, 'booty@sniff.com')
-password_entry = Entry(**entry_style)
-password_entry.grid(row=3, column=1, pady=5, ipady=10)
+pwsy_entry = Entry(**entry_style)
+pwsy_entry.grid(row=3, column=1, pady=5, ipady=10)
 pwd = generate_password()
-password_entry.delete(0, END)
-password_entry.insert(0, pwd)
+pwsy_entry.delete(0, END)
+pwsy_entry.insert(0, pwd)
 
 # --- Buttons ---
 generate_password_button = Button(text="GENPWD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=generate_password)
