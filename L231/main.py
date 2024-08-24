@@ -93,7 +93,6 @@ def find_pass():
 	try:
 		with open(fil_pa) as d_f:
 			da = json.load(d_f)
-			print(da)
 	except FileNotFoundError:
 		messagebox.showwarning(title="FUCKED", message="Bastard no File")
 	else:
@@ -101,6 +100,8 @@ def find_pass():
 			email = da[website]["email"]
 			pasy = da[website]["pasy"]
 			messagebox.showinfo(title=website, message=f"Email: {email}\nPwsy: {pasy}")
+		else:
+			messagebox.showerror(title="Fucked", message="DOESNT EXIST")
 
 
 # ---------------------------- OpenWebsite ------------------------------- #
