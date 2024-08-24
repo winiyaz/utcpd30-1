@@ -84,6 +84,10 @@ def save():
 				window.quit()  # Stops the main event loop
 				window.destroy()  # Destroys the main window
 
+# ---------------------------- FIND PASSWORD ------------------------------- #
+
+def find_pass():
+	pass
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -92,10 +96,11 @@ window.configure(bg=MAINBG, padx=100, pady=100)
 
 # --- Setup Canvas
 
+
 canvas = Canvas(height=200, width=200, highlightthickness=0)
 logo_img = PhotoImage(file="n.png")
 canvas.create_image(100, 100, image=logo_img)
-canvas.grid(row=0, column=1, pady=20)
+canvas.grid(row=1, column=1, pady=20)
 
 # --- Labels ---
 
@@ -106,12 +111,15 @@ label_style = {
 	'font': ('Arial', 20)
 }
 
+haader_label = Label(text="App stores password in json \n file and can perform search \n", font=('Courier', 30), bg="black", fg="red")
+haader_label.grid(row=0, column=1)
+
 website_label = Label(text="Website  ", **label_style)
-website_label.grid(row=1, column=0)
+website_label.grid(row=2, column=0)
 email_label = Label(text="Email/Username  ", **label_style)
-email_label.grid(row=2, column=0)
+email_label.grid(row=3, column=0)
 password_label = Label(text="Pwsy  ", **label_style)
-password_label.grid(row=3, column=0)
+password_label.grid(row=4, column=0)
 
 # Entry styles made into an object that is then being called inside Entry
 entry_style = {
@@ -128,21 +136,23 @@ entry_style = {
 # --- Entry Boxes --
 website_entry = Entry(**entry_style)
 website_entry.focus()
-website_entry.grid(row=1, column=1, pady=5, columnspan=2, ipady=10)
+website_entry.grid(row=2, column=1, pady=5, columnspan=2, ipady=10)
 email_entry = Entry(**entry_style)
-email_entry.grid(row=2, column=1, pady=5, columnspan=2, ipady=10)
+email_entry.grid(row=3, column=1, pady=5, columnspan=2, ipady=10)
 email_entry.insert(0, 'booty@sniff.com')
 pwsy_entry = Entry(**entry_style)
-pwsy_entry.grid(row=3, column=1, pady=5, ipady=10)
+pwsy_entry.grid(row=4, column=1, pady=5, ipady=10)
 pwd = generate_password()
 pwsy_entry.delete(0, END)
 pwsy_entry.insert(0, pwd)
 
 # --- Buttons ---
+search_button = Button(text="Search", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=find_pass)
+search_button.grid(row=2, column=3)
 generate_password_button = Button(text="GENPWD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, command=generate_password)
-generate_password_button.grid(row=3, column=3)
+generate_password_button.grid(row=4, column=3)
 add_button = Button(text="ADD", font=('Arial', 15), bg=BUTTONBG, fg=ENTRYFG, width=46, command=save)
-add_button.grid(row=4, column=1, pady=20, columnspan=2)
+add_button.grid(row=5, column=1, pady=20, columnspan=2)
 
 # -- Window Setup ---
 window.mainloop()
