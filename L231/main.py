@@ -3,11 +3,10 @@ import json
 import os  # For writing directory
 import secrets
 import string
+import webbrowser
+from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
-from datetime import datetime
-import webbrowser
-
 
 import pyperclip
 
@@ -38,7 +37,6 @@ def generate_password(length=22):
 
 # Ensure directory called 'panty' is present , if not create
 os.makedirs('panty', exist_ok=True)
-
 
 
 def save():
@@ -87,17 +85,22 @@ def save():
 				window.quit()  # Stops the main event loop
 				window.destroy()  # Destroys the main window
 
+
 # ---------------------------- FIND PASSWORD ------------------------------- #
 
 def find_pass():
 	website = website_entry.get()
-	with open(fil_pa) as d_f:
-		da = json.load(d_f)
+	try:
+		with open(fil_pa) as d_f:
+			da = json.load(d_f)
+			print(da)
+	except FileNotFoundError:
+		messagebox.showwarning(title="FUCKED", message="Bastard no File")
+	else:
 		if website in da:
 			email = da[website]["email"]
 			pasy = da[website]["pasy"]
 			messagebox.showinfo(title=website, message=f"Email: {email}\nPwsy: {pasy}")
-		print(da)
 
 
 # ---------------------------- OpenWebsite ------------------------------- #
@@ -130,7 +133,8 @@ label_style = {
 	'font': ('Arial', 20)
 }
 
-haader_label = Label(text="App stores pwd in json\nfile and \nperform search", pady=30,font=('Courier', 20), bg="black", fg="red")
+haader_label = Label(text="App stores pwd in json\nfile and \nperform search", pady=30, font=('Courier', 20),
+					 bg="black", fg="red")
 haader_label.grid(row=0, column=1)
 
 website_label = Label(text="Website  ", **label_style)
