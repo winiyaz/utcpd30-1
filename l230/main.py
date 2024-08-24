@@ -8,7 +8,20 @@ da = pd.read_csv("np.csv")
 dic = {row.letter: row.code for (index, row) in da.iterrows()}
 print(dic)
 
-# Getting input
-wo = input("WriteWord: ").upper()
-out = [dic[letter] for letter in wo]
-print(out)
+
+def ge_po():
+	# Getting input
+	wo = input("WriteWord: ").upper()
+	try:
+		out = [dic[letter] for letter in wo]
+	except KeyError:
+		print(f"""
+	Entered : {wo}
+	!! Letters from alphabhet only !!
+	""")
+		ge_po()
+	else:
+		print(out)
+
+
+ge_po()
