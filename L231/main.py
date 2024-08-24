@@ -1,10 +1,11 @@
 # Importing  packages
+import json
 import os  # For writing directory
 import secrets
 import string
-from datetime import datetime, timezone  # for getting current date and time
 from tkinter import *
 from tkinter import messagebox
+
 import pyperclip
 
 # -- Color Constants
@@ -39,32 +40,37 @@ def save():
 	website = website_entry.get()
 	email = email_entry.get()
 	password = password_entry.get()
-	current_datetime_utc = datetime.now(timezone.utc)  # get current data and time UTCTZ
+	# current_datetime_utc = datetime.now(timezone.utc)  # get current data and time UTCTZ
+	new_data = {
+		website: {
+			"email": email,
+			"password": password
+		}
+
+	}
 
 	if len(website) == 0 or len(password) == 0:
 		messagebox.showinfo(title="😡FUKR", message="NoEmpty")
 	else:
-		is_ok = messagebox.askokcancel(title=website, message=f"""
-		Details Entered:
-		website: {website}
-		Email:{email}
-		Password: {password}
-		---
-		Good ? 	
-	""")
+		# is_ok = messagebox.askokcancel(title=website, message=f"""
+		# 	Details Entered:
+		# 	website: {website}
+		# 	Email:{email}
+		# 	Password: {password}
+		# 	---
+		# 	Good ?
+		# """)
 
-	# --- Validation
-	if is_ok:
-		with open('panty/sniff.txt', "a") as data_file:
-			data_file.write(f"""
-	***************************
-	UTC - {current_datetime_utc}
-	---
-	* Website  = {website}   
-	* Email    = {email} 
-	* Password = {password} 
-	**************************
-	""")
+		# --- Validation
+		# if is_ok:
+		fil_pa = 'panty/sniff.json'
+		with open(fil_pa, "r") as data_file:
+			data = json.load(data_file)
+			data.update(new_data) # new_data refers to the object already created
+
+		with open(fil_pa, "w") as data_file:
+			json.dump(data, data_file, indent=4)
+			print(data)
 			website_entry.delete(0, END)
 			password_entry.delete(0, END)
 			window.quit()  # Stops the main event loop
