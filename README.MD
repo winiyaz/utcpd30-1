@@ -14,3 +14,27 @@
 1. Code here taken fro - [`utcpd29-1-`](https://github.com/winiyaz/utcpd29-1-/tree/master/pms1)
     1. Now adding exception handling here also
 
+# Dira 
+
+N | ? 
+[`KG`](./KG) | Working in kgz
+[`l230`](./l230) | Nato Project with exception
+[`L231`](./L231) | Upgrading [https://github.com/winiyaz/utcpd29-1-/blob/master/pms1/c.gif](https://github.com/winiyaz/utcpd29-1-/blob/master/pms1/c.gif)
+
+## Completed Upgraded Project 
+
+### L231 - Upgraded Pawsy With features 
+
+---
+
+![](./L231/k.gif)
+
+--- 
+
+### L230 - Upgrading  with exception 
+
+---
+
+![](./l230/o.png)
+
+---
