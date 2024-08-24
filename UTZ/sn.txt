@@ -1,0 +1,16 @@
+"Print to console": {
+	"scope": "javascript,typescript",
+	"prefix": "cl",
+	"body": [
+		"console.log();",
+	],
+	"description": "Log output to console"
+},
+"Console Table": {
+	"scope": "javascript,typescript",
+	"prefix": "clt",
+	"body": [
+		"console.table();",
+	],
+	"description": "Console Log Table"
+}

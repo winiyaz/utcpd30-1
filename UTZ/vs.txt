@@ -1,0 +1,31 @@
+{
+  // Prettier , Indent Rainbow , Error Lens, Color , Typescript , Icons , Obsidian Theme , Mayuki theme, Import Cost , ES7 React Snippets, Vuln Cost - Security Scanner
+  "workbench.list.smoothScrolling": true,
+  "editor.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "editor.renderWhitespace": "all",
+  "editor.guides.bracketPairs": "active",
+  "editor.lineHeight": 2,
+  "editor.fontSize": 17,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Propo",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.iconTheme": "simple-icons",
+  "editor.stickyScroll.enabled": true,
+  "terminal.integrated.cursorWidth": 2,
+  "editor.cursorBlinking": "expand",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.lineHeight": 1.5,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Propo",
+  "terminal.integrated.fontSize": 15,
+  "codesandbox.preinstalledExtensions": [
+    "esbenp.prettier-vscode",
+    "GitHub.vscode-pull-request-github",
+    "usernamehw.errorlens",
+    "matthewnespor.vscode-color-identifiers-mode",
+    "oderwat.indent-rainbow",
+    "laurenttreguier.vscode-simple-icons"
+  ]
+}
